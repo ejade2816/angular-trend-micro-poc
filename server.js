@@ -6,8 +6,7 @@ const app = express();
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        console.log(process.env.FILE_UPLOAD_DESTINATION_PATH)
-        // cb(null, "C:/Users/jxian01/Projects/CAA/virus_chk_pending");
+        cb(null, process.env.FILE_UPLOAD_DESTINATION_PATH);
     },
     filename: function (req, file, cb) {
         console.log(file)
