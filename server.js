@@ -15,21 +15,23 @@ var storage = multer.diskStorage({
     },
 });
 
-const upload = multer({ storage: storage });
 app.use(cors("*"));
 app.use(express.json());
+
+app.get("/api/hello", function(req, res) {
+    console.log("/api/hello")
+    res.status(200).json({ "status": "ok" });
+})
+
+const upload = multer({ storage: storage });
+app.post("/api/document-upload", upload.single("document"), function (req, res) {
+    console.log("/api/document-upload")
+    res.status(200).json({ "status": "ok" });
+});
 
 app.use(express.static(__dirname + '/dist/angular-trend-micro-poc'));
 app.get('/*', function(req,res) {
     res.sendFile(path.join(__dirname+'/dist/angular-trend-micro-poc/index.html'));
-});
-
-app.get("/api/hello", function(req, res) {
-    res.status(200).json({ "status": "ok" });
-})
-
-app.post("/api/document-upload", upload.single("document"), function (req, res) {
-    res.status(200).json({ "status": "ok" });
 });
 
 app.listen(process.env.PORT || 3200);
