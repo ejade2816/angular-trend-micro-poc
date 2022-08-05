@@ -24,6 +24,10 @@ app.get('/*', function(req,res) {
     res.sendFile(path.join(__dirname+'/dist/angular-trend-micro-poc/index.html'));
 });
 
+app.get("/api/hello", function(req, res) {
+    res.status(200).json({ "status": "ok" });
+})
+
 app.post("/api/document-upload", upload.single("document"), function (req, res) {
     res.status(200).json({ "status": "ok" });
 });
